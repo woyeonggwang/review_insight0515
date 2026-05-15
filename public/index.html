@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Sentiment Analyzer | 감성 분석 서비스</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header style="background: var(--color-white); box-shadow: var(--shadow-nav); padding: var(--space-3) 0;">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <div id="logo" style="font-weight: 700; color: var(--color-starbucks-green); font-size: 20px;">
+                AI Sentiment Analyzer
+            </div>
+            <nav>
+                <ul style="list-style: none; display: flex; gap: var(--space-4); font-size: var(--text-small); font-weight: 600;">
+                    <li><a href="#" style="text-decoration: none; color: var(--color-text-main);">서비스 소개</a></li>
+                    <li><a href="#" style="text-decoration: none; color: var(--color-text-main);">사용 방법</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" style="padding: 64px 0; text-align: center; background-color: var(--color-warm-bg);">
+            <div class="container" style="max-width: 720px;">
+                <h1 class="animate-title">AI 감성 분석 서비스</h1>
+                <p class="sub-text mt-3">텍스트를 입력하면 AI가 문장의 감성을 긍정, 부정, 중립으로 분석합니다.</p>
+                
+                <!-- Input Card -->
+                <div class="card mt-6" style="text-align: left;">
+                    <label for="sentimentText" style="display: block; font-weight: 600; margin-bottom: var(--space-2);">분석할 문장</label>
+                    <textarea id="sentimentText" placeholder="분석하고 싶은 문장을 입력하세요. 예: 오늘 서비스가 정말 만족스러웠어요." 
+                        style="width: 100%; min-height: 180px; border: 1px solid var(--color-ceramic-bg); border-radius: var(--radius-card); padding: var(--space-3); font-family: inherit; font-size: var(--text-body); resize: vertical; outline: none;"></textarea>
+                    <div style="display: flex; justify-content: space-between; align-items: center;" class="mt-3">
+                        <span id="charCount" style="font-size: var(--text-small); color: var(--color-text-sub);">0 / 1,000</span>
+                        <button id="analyzeButton" class="button-primary">감성분석</button>
+                    </div>
+                    <p id="errorMessage" style="color: var(--color-error); font-size: var(--text-small); margin-top: var(--space-2); display: none;"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Info Cards Section -->
+        <section id="info" style="padding: 64px 0;">
+            <div class="container">
+                <div class="info-cards">
+                    <!-- Positive -->
+                    <div class="card" style="border-top: 4px solid var(--color-positive);">
+                        <h3 style="color: var(--color-positive);">긍정 분석</h3>
+                        <p class="mt-2" style="font-size: var(--text-small);">만족, 기대, 칭찬, 호의적인 표현을 감지합니다.</p>
+                    </div>
+                    <!-- Negative -->
+                    <div class="card" style="border-top: 4px solid var(--color-negative);">
+                        <h3 style="color: var(--color-negative);">부정 분석</h3>
+                        <p class="mt-2" style="font-size: var(--text-small);">불만, 실망, 분노, 비판적인 표현을 감지합니다.</p>
+                    </div>
+                    <!-- Neutral -->
+                    <div class="card" style="border-top: 4px solid var(--color-neutral);">
+                        <h3 style="color: var(--color-neutral);">중립 분석</h3>
+                        <p class="mt-2" style="font-size: var(--text-small);">감정 표현이 약하거나 정보 전달 중심의 문장을 분류합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer style="padding: var(--space-6) 0; text-align: center; color: var(--color-text-sub); font-size: var(--text-small);">
+        <div class="container">
+            <p>&copy; 2026 AI Sentiment Analyzer. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Result Modal -->
+    <div id="resultModalBackdrop" class="modal-backdrop">
+        <div id="resultModal" class="modal">
+            <h2 id="modalTitle" style="color: var(--color-starbucks-green);">분석 결과</h2>
+            <div class="mt-4" style="text-align: center;">
+                <div id="resultLabel" style="font-size: 32px; font-weight: 700;">긍정</div>
+                <div id="resultConfidence" style="font-size: var(--text-body); color: var(--color-text-sub);" class="mt-1">신뢰도 92%</div>
+            </div>
+            <hr style="border: none; border-top: 1px solid var(--color-ceramic-bg); margin: var(--space-4) 0;">
+            <div id="resultReason" style="font-size: var(--text-body); line-height: 1.6;">
+                문장에 긍정적인 표현이 포함되어 있습니다. 전반적인 어조가 호의적이며 불만 표현이 없습니다.
+            </div>
+            <div class="mt-6" style="display: flex; gap: var(--space-3);">
+                <button id="modalCloseButton" class="button-primary" style="flex: 1; background: var(--color-ceramic-bg); border-color: var(--color-ceramic-bg); color: var(--color-text-main);">닫기</button>
+                <button id="modalConfirmButton" class="button-primary" style="flex: 1;">확인</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="js/app.js"></script>
+</body>
+</html>

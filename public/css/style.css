@@ -1,0 +1,208 @@
+/* 
+  AI Sentiment Analyzer - Starbucks Style Design System
+  따뜻하고 신뢰감 있는 디자인을 지향합니다.
+*/
+
+:root {
+  /* 색상 토큰 */
+  --color-starbucks-green: #006241;
+  --color-green-accent: #00754A;
+  --color-house-green: #1E3932;
+  --color-green-light: #d4e9e2;
+
+  --color-warm-bg: #f2f0eb;
+  --color-ceramic-bg: #edebe9;
+  --color-white: #ffffff;
+
+  --color-text-main: rgba(0, 0, 0, 0.87);
+  --color-text-sub: rgba(0, 0, 0, 0.58);
+  --color-text-white: #ffffff;
+  --color-text-white-soft: rgba(255, 255, 255, 0.70);
+
+  --color-error: #c82014;
+  --color-gold: #cba258;
+
+  /* 감성별 색상 */
+  --color-positive: #00754A;
+  --color-negative: #c82014;
+  --color-neutral: rgba(0,0,0,0.58);
+
+  /* Typography */
+  --font-main: 'Inter', 'Manrope', "Helvetica Neue", Arial, sans-serif;
+  --text-h1: 32px;
+  --text-h2: 24px;
+  --text-body: 16px;
+  --text-small: 14px;
+  --line-normal: 1.5;
+  --line-compact: 1.2;
+  --letter-tight: -0.01em;
+
+  /* Spacing */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 40px;
+  --space-7: 48px;
+  --space-8: 56px;
+  --space-9: 64px;
+
+  /* Border Radius */
+  --radius-card: 12px;
+  --radius-button: 50px;
+  --radius-circle: 50%;
+
+  /* Shadow */
+  --shadow-card: 0 0 0.5px rgba(0,0,0,0.14),
+                 0 1px 1px rgba(0,0,0,0.24);
+  --shadow-nav: 0 1px 3px rgba(0,0,0,0.1),
+                0 2px 2px rgba(0,0,0,0.06),
+                0 0 2px rgba(0,0,0,0.07);
+  --shadow-modal: 0 0 6px rgba(0,0,0,0.24),
+                  0 8px 12px rgba(0,0,0,0.14);
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--color-warm-bg);
+  color: var(--color-text-main);
+  line-height: var(--line-normal);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Layout */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+/* Typography Classes */
+h1 {
+  font-size: var(--text-h1);
+  font-weight: 700;
+  color: var(--color-starbucks-green);
+  letter-spacing: var(--letter-tight);
+}
+
+p.sub-text {
+  font-size: var(--text-body);
+  color: var(--color-text-sub);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-title {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Components */
+.button-primary {
+  background: var(--color-green-accent);
+  color: var(--color-white);
+  border: 1px solid var(--color-green-accent);
+  border-radius: var(--radius-button);
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: var(--letter-tight);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-primary:hover {
+  background: var(--color-house-green);
+  border-color: var(--color-house-green);
+}
+
+.button-primary:active {
+  transform: scale(0.95);
+}
+
+.button-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.card {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-5);
+  transition: transform 0.3s ease;
+}
+
+/* Modal */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.48);
+  display: none; /* JS로 제어 */
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.show {
+  display: flex;
+  opacity: 1;
+}
+
+.modal {
+  background: var(--color-white);
+  border-radius: var(--radius-card);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-modal);
+  max-width: 480px;
+  width: 90%;
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-backdrop.show .modal {
+  transform: scale(1);
+}
+
+/* Utility */
+.mt-1 { margin-top: var(--space-1); }
+.mt-2 { margin-top: var(--space-2); }
+.mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .info-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 769px) {
+  .info-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+  }
+}
